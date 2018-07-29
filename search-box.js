@@ -5,7 +5,8 @@ import {
   Text,
   View,
   TextInput,
-  PixelRatio
+  PixelRatio,
+  TouchableHighlight
 } from "react-native";
 
 export default class SearchComponent extends Component {
@@ -65,36 +66,39 @@ export default class SearchComponent extends Component {
         </View>
         {this.state.showHint ? (
           <View style={styles.hintContainer}>
-            <Text
+            <TouchableHighlight
               onPress={this.handleHintWordSelected.bind(
                 this,
                 "美团" + this.state.queryText
               )}
-              numberOfLines={1}
-              style={styles.hintText}
+              underlayColor="#ea66a6"
             >
-              美团{this.state.queryText}
-            </Text>
-            <Text
+              <Text numberOfLines={1} style={styles.hintText}>
+                美团{this.state.queryText}
+              </Text>
+            </TouchableHighlight>
+            <TouchableHighlight
               onPress={this.handleHintWordSelected.bind(
                 this,
                 "点评" + this.state.queryText
               )}
-              numberOfLines={1}
-              style={styles.hintText}
+              underlayColor="#ea66a6"
             >
-              点评{this.state.queryText}
-            </Text>
-            <Text
+              <Text numberOfLines={1} style={styles.hintText}>
+                点评{this.state.queryText}
+              </Text>
+            </TouchableHighlight>
+            <TouchableHighlight
               onPress={this.handleHintWordSelected.bind(
                 this,
                 "支付宝" + this.state.queryText
               )}
-              numberOfLines={1}
-              style={styles.hintText}
+              underlayColor="#ea66a6"
             >
-              支付宝{this.state.queryText}
-            </Text>
+              <Text numberOfLines={1} style={styles.hintText}>
+                支付宝{this.state.queryText}
+              </Text>
+            </TouchableHighlight>
           </View>
         ) : null}
       </View>
