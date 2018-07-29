@@ -15,7 +15,7 @@ export default class CategoryComponent extends Component {
     const { navigate } = this.props.navigation;
     const self = this;
     return (
-      <View style={styles.flex}>
+      <View>
         <View style={styles.container}>
           <View style={[styles.item, styles.center]}>
             <Text
