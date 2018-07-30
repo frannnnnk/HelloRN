@@ -45,10 +45,12 @@ class NewsList extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      cHeight: 0,
       dataSource: new ListView.DataSource({
         rowHasChanged: (row1, row2) => row1 !== row2
       })
     };
+    var hasGetHeight = false;
   }
 
   componentDidMount() {
@@ -59,11 +61,15 @@ class NewsList extends Component {
 
   render() {
     return (
-      <ListView
-        dataSource={this.state.dataSource}
-        renderRow={this._renderRow}
-        style={listStyle.listView}
-      />
+      <View>
+        <ListView
+          dataSource={this.state.dataSource}
+          renderRow={this._renderRow}
+          style={listStyle.listView}
+          contentContainerStyle={listStyle.container}
+          onContentSizeChange={this._onContentSizeChange}
+        />
+      </View>
     );
   }
 
@@ -77,6 +83,11 @@ class NewsList extends Component {
 }
 
 const listStyle = StyleSheet.create({
+  container: {
+    justifyContent: "flex-start",
+    flexDirection: "column",
+    flexWrap: "wrap"
+  },
   listView: {
     backgroundColor: "#F5FCFF"
   },
@@ -86,7 +97,7 @@ const listStyle = StyleSheet.create({
     paddingLeft: 10,
     paddingRight: 10,
     paddingTop: 5,
-    paddingBottom: 5,
+    paddingBottom: 5
   },
   listItemText: {
     fontSize: 16,
