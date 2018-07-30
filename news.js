@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { StyleSheet, Text, View, PixelRatio } from "react-native";
+import { StyleSheet, Text, View, PixelRatio, ListView } from "react-native";
 
 /**
  * 头部
@@ -42,33 +42,55 @@ const styles = StyleSheet.create({
  * 新闻列表
  */
 class NewsList extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      dataSource: new ListView.DataSource({
+        rowHasChanged: (row1, row2) => row1 !== row2
+      })
+    };
+  }
+
+  componentDidMount() {
+    this.setState({
+      dataSource: this.state.dataSource.cloneWithRows(this.props.news)
+    });
+  }
+
   render() {
-    var news = [];
-    for (var i in this.props.news) {
-      var t = (
-        <View style={listStyle.listItem} key={i}>
-          <Text numberOfLines={1} style={listStyle.listItemFont}>
-            {this.props.news[i]}
-          </Text>
-        </View>
-      );
-      news.push(t);
-    }
-    return <View>{news}</View>;
+    return (
+      <ListView
+        dataSource={this.state.dataSource}
+        renderRow={this._renderRow}
+        style={listStyle.listView}
+      />
+    );
+  }
+
+  _renderRow(rowData, sectionId, rowId) {
+    return (
+      <View style={listStyle.listItem}>
+        <Text style={listStyle.listItemText}>{rowData}</Text>
+      </View>
+    );
   }
 }
 
 const listStyle = StyleSheet.create({
-  listItem: {
-    height: 40,
-    marginLeft: 10,
-    marginRight: 10,
-    borderBottomWidth: 1,
-    borderBottomColor: "#ddd",
-    justifyContent: "center"
+  listView: {
+    backgroundColor: "#F5FCFF"
   },
-  listItemFont: {
-    fontSize: 16
+  listItem: {
+    alignItems: "flex-start",
+    justifyContent: "center",
+    paddingLeft: 10,
+    paddingRight: 10,
+    paddingTop: 5,
+    paddingBottom: 5,
+  },
+  listItemText: {
+    fontSize: 16,
+    fontWeight: "bold"
   }
 });
 
@@ -105,9 +127,6 @@ class ImportantNews extends Component {
 }
 
 const importNewsStyle = StyleSheet.create({
-  flex: {
-    flex: 1
-  },
   title: {
     fontSize: 20,
     fontWeight: "bold",
