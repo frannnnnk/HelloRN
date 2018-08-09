@@ -10,10 +10,12 @@ import { StackNavigator } from "react-navigation";
 
 import HomeComponent from "./home";
 import WangyiNews from "./news";
+import MultiTabDemo from "./tabdemo";
 
 const App = StackNavigator({
   Home: { screen: HomeComponent },
-  WangyiNews: { screen: WangyiNews }
+  WangyiNews: { screen: WangyiNews },
+  MultiTabDemo : {screen: MultiTabDemo }
 });
 
 AppRegistry.registerComponent("HelloRN", () => App);

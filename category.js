@@ -29,12 +29,20 @@ export default class CategoryComponent extends Component {
               }}
               style={styles.font}
             >
-              网易新闻{this.state.WangyiNewsCode}
+              网易新闻
+              {this.state.WangyiNewsCode}
             </Text>
           </View>
           <View style={[styles.item, styles.lineLeftAndRight]}>
             <View style={[styles.item2, styles.center, styles.lineCenter]}>
-              <Text style={styles.font}>海外酒店</Text>
+              <Text
+                style={styles.font}
+                onPress={() => {
+                  navigate("MultiTabDemo", {});
+                }}
+              >
+                多TAB DEMO
+              </Text>
             </View>
             <View style={[styles.item2, styles.center]}>
               <Text style={styles.font}>特惠酒店</Text>
